@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
-
     @Autowired
     private PersonRepository personRepository;
 
@@ -17,7 +17,16 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public Person createPerson(Person person) {
+    public Person savePerson(Person person) {
         return personRepository.save(person);
     }
+
+    public Optional<Person> searchPerson(long id) {
+        return personRepository.findById(id);
+    }
+
+    public void deletePerson(long id) {
+        personRepository.deleteById(id);
+    }
+
 }
