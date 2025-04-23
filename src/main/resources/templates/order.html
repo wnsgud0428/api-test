@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function fn() {
+            orderData = {id: personId.value, productName: productName.value, price: price.value};
+            console.log(orderData);
+            fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+                .then(response => response.json())
+                .then(data => resultFn(data));
+        }
+
+        function resultFn(data) {
+            console.log(data);
+            show.innerHTML = `<h3>고객 ID:${data.personId} 상품명:${data.productName} 가격:${data.price} 입력됨</h3>`;
+        }
+    </script>
+</head>
+<body>
+<h1>입력</h1>
+<hr>
+<label>고객 아이디:</label> <input id="personId" type="number"> <br>
+<label>상품명:</label> <input id="productName" type="text"> <br>
+<label>가격:</label> <input id="price" type="text"> <br>
+<button onclick="fn()">입력</button>
+<hr>
+<div id="show"></div>
+</body>
+</html>

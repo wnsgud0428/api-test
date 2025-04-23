@@ -1,7 +1,7 @@
-package com.example.rest_test.controller;
+package com.example.api_test.controller;
 
-import com.example.rest_test.model.Person;
-import com.example.rest_test.service.PersonService;
+import com.example.api_test.model.Person;
+import com.example.api_test.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,24 +14,24 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping
-    public List<Person> getAllPersons() {
-        return personService.getAllPersons();
-    }
-
-//    @PostMapping
-//    public Person createPerson(@RequestParam String name, @RequestParam int age) {
-//        return personService.createPerson(new Person(null, name, age));
-//    }
-
     @PostMapping
-    public Person createPerson(@RequestBody Person person) {
+    public Person insertPerson(@RequestBody Person person) {
         return personService.savePerson(person);
     }
 
+    //    @PostMapping
+    //    public Person createPerson(@RequestParam String name, @RequestParam int age) {
+    //        return personService.createPerson(new Person(null, name, age));
+    //    }
+
     @GetMapping("/{id}")
     public Optional<Person> getPerson(@PathVariable Long id) {
-        return personService.searchPerson(id);
+        return personService.findPerson(id);
+    }
+
+    @GetMapping
+    public List<Person> getAllPersons() {
+        return personService.getAllPersons();
     }
 
     @PutMapping("/{id}")
@@ -43,7 +43,7 @@ public class PersonController {
     @DeleteMapping("/{id}")
     @ResponseBody // return 값을 reponse body에 담아서 보냄
     public String deletePerson(@PathVariable Long id) {
-        if (personService.searchPerson(id).isPresent()) {
+        if (personService.findPerson(id).isPresent()) {
             personService.deletePerson(id);
             return "<h3>삭제됨</h3>";
         } else {
