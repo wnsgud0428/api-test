@@ -5,7 +5,7 @@
     <title>Title</title>
     <script>
         function fn() {
-            orderData = {id: personId.value, productName: productName.value, price: price.value};
+            orderData = {person: {id:personId.value}, productName: productName.value, price: price.value};
             console.log(orderData);
             fetch('/api/orders', {
                 method: 'POST',

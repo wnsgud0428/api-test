@@ -1,0 +1,4 @@
+2025-04-23 17:30:17.934225+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM ORDERS \000d\000a[*]SELECT * FROM PERSON"; SQL statement:
+SELECT * FROM ORDERS 
+SELECT * FROM PERSON [42000-232]
